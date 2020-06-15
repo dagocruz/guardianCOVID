@@ -1,0 +1,283 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mis Síntomas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8" offset="2">
+          <div class="ion-text-center">
+            <p> <ion-text color="primary">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+  
+        <ion-col size="2" offset="5">
+          <ion-img *ngIf="usuario.genero=='femenino'" src="../../../assets/avatarFemenino.png"></ion-img>
+          <ion-img *ngIf="usuario.genero=='masculino'" src="../../../assets/avatarMasculino.png"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" offset="2">
+          <div class="ion-text-center">
+            <h3>{{usuario.nombre}}</h3>
+            <ion-text color="secondary">
+                <h4> {{edad}} años</h4>
+            </ion-text>
+            <p><ion-text color="medium">{{usuario?.residencia.nombre}}</ion-text></p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div id="container">
+        <form [formGroup]="datosUsuarioForm" (ngSubmit)="registrarSintomas()">
+          <ion-item-group>
+            <ion-item-divider>
+              <ion-label>¿Ha presentado alguno de los siguientes síntomas?</ion-label>
+            </ion-item-divider>
+            <div formGroupName="tos">
+              <ion-item>
+                <ion-label>Tos </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('tos')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['tos']?true:datosUsuarioForm.value.tos.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+    
+            <div formGroupName="fatiga">
+              <ion-item>
+                <ion-label>Fatiga </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('fatiga')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['fatiga']?true:datosUsuarioForm.value.fatiga.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+    
+            <!--<ion-item *ngIf="datosUsuarioForm.value.fatiga">
+                <ion-label>Inicio de fatiga</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" min="2020-01-01" [max]="today" placeholder="Seleccionar fecha" formControlName="inicioFatiga"></ion-datetime>
+              </ion-item>-->
+              
+              <div formGroupName="fiebre">
+                <ion-item>
+                  <ion-label>Fiebre </ion-label>
+                  <ion-toggle formControlName="valor"></ion-toggle>
+                </ion-item>
+        
+                <!--<ion-item *ngIf="datosUsuarioForm.value.fiebre.fecha">-->
+                <ion-item>
+                  <ion-label>Registrado el</ion-label>
+                  <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="today" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+                </ion-item>
+              </div>
+    
+              <div formGroupName="dificultad_respirar">
+                <ion-item>
+                  <ion-label>Dificultad para respirar </ion-label>
+                  <ion-toggle formControlName="valor" (ionChange)="checkData('dificultad_respirar')"></ion-toggle>
+                </ion-item>
+        
+                <ion-item *ngIf="sintomas['dificultad_respirar']?true:datosUsuarioForm.value.dificultad_respirar.valor">
+                  <ion-label></ion-label>
+                  <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+                </ion-item>
+              </div>
+    
+            <!--<ion-item *ngIf="datosUsuarioForm.value.dificultad_respirar">
+              <ion-label>Inicio de dificultad para respirar</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" min="2020-01-01" [max]="today" placeholder="Seleccionar fecha" formControlName="inicioDificultadRespirar"></ion-datetime>
+            </ion-item>-->
+
+            <div formGroupName="perdida_olfato_gusto">
+              <ion-item>
+                <ion-label>Perdida de olfato y gusto </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('perdida_olfato_gusto')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['perdida_olfato_gusto']?true:datosUsuarioForm.value.perdida_olfato_gusto.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+
+            <div formGroupName="dolor_pecho">
+              <ion-item>
+                <ion-label>Dolor de pecho </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('dolor_pecho')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['dolor_pecho']?true:datosUsuarioForm.value.dolor_pecho.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+
+            <div formGroupName="hipoxemia">
+              <ion-item>
+                <ion-label>Hipoxemia </ion-label>
+                <ion-toggle formControlName="valor"></ion-toggle>
+              </ion-item>
+      
+              <!--<ion-item *ngIf="datosUsuarioForm.value.hipoxemia.fecha">-->
+              <ion-item>
+                <ion-label>Registrado el</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="today" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+
+            <div formGroupName="artalgias">
+              <ion-item>
+                <ion-label>Dolor articular (artalgias) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('artalgias')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['artalgias']?true:datosUsuarioForm.value.artalgias.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+            
+            <div formGroupName="mialgias">
+              <ion-item>
+                <ion-label>Cuerpo cortado/Dolor muscular (mialgias) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('mialgias')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['mialgias']?true:datosUsuarioForm.value.mialgias.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+
+            <div formGroupName="odinofagia">
+              <ion-item>
+                <ion-label>Dolor o ardor de garganta (odinofagia) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('odinofagia')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['odinofagia']?true:datosUsuarioForm.value.odinofagia.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+            
+
+            <div formGroupName="rinorrea">
+              <ion-item>
+                <ion-label>Escurrimiento nasal (rinorrea) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('rinorrea')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['rinorrea']?true:datosUsuarioForm.value.rinorrea.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+
+            <div formGroupName="conjuntivitis">
+              <ion-item>
+                <ion-label>Irritación y ardor de los ojos (conjuntivitis) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('conjuntivitis')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['conjuntivitis']?true:datosUsuarioForm.value.conjuntivitis.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+
+            <div formGroupName="dolor_cabeza">
+              <ion-item>
+                <ion-label>Dolor de cabeza </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('dolor_cabeza')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['dolor_cabeza']?true:datosUsuarioForm.value.dolor_cabeza.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+            
+
+            <div formGroupName="diarrea">
+              <ion-item>
+                <ion-label>Diarrea </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('diarrea')"></ion-toggle>
+              </ion-item>
+      
+              <ion-item *ngIf="sintomas['diarrea']?true:datosUsuarioForm.value.diarrea.valor">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+
+            <ion-item-divider color="medium">
+              <ion-label>Confusión (Confusion Assessment Method)</ion-label>
+              <ion-button fill="clear" size="small" color="dark" (click)="presentPopover(0)">
+                <ion-icon slot="icon-only" name="help-circle" [ngStyle]="{'color':'rgb(255,255,255)'}"></ion-icon>
+              </ion-button>
+            </ion-item-divider>
+            <div formGroupName="cam">
+              <ion-item *ngIf="sintomas['cam']?true:datosUsuarioForm.value.cam.criterio_1 || datosUsuarioForm.value.cam.criterio_2 || datosUsuarioForm.value.cam.criterio_3 || datosUsuarioForm.value.cam.criterio_4">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+              <ion-item>
+                <ion-label class="ion-text-wrap">
+                  1. Cambio en su estado mental habitual, con inicio súbito y curso fluctuante 
+                </ion-label>
+                <ion-toggle formControlName="criterio_1" (ionChange)="checkCAM('criterio_1')"></ion-toggle>
+              </ion-item>
+              <ion-item>
+                <ion-label class="ion-text-wrap">2. Disminución de la atención 
+                <ion-text color="medium">
+                    <span [ngStyle]="{'font-size': '0.8em'}"> <br>Ejemplo: incapacidad para contar en reversa del 20 al 0</span>
+                </ion-text>
+                </ion-label>
+                <ion-toggle formControlName="criterio_2" (ionChange)="checkCAM('criterio_2')"></ion-toggle>
+              </ion-item>
+              <ion-item>
+                <ion-label class="ion-text-wrap">3. Pensamiento desorganizado
+                    <ion-text color="medium">
+                        <span [ngStyle]="{'font-size': '0.8em'}"> <br>Lenguaje divagante, confuso o incoherente</span>
+                    </ion-text>
+                </ion-label>
+                
+                <ion-toggle formControlName="criterio_3" (ionChange)="checkCAM('criterio_3')"></ion-toggle>
+              </ion-item>
+              <ion-item>
+                <ion-label class="ion-text-wrap">4. Alteración del estado de conciencia
+                    <ion-text color="medium">
+                        <span [ngStyle]="{'font-size': '0.8em'}"> <br>Somnolencia o agitación psicomotriz</span>
+                    </ion-text>
+                </ion-label>
+                <ion-toggle formControlName="criterio_4" (ionChange)="checkCAM('criterio_4')"></ion-toggle>
+              </ion-item>
+            </div>
+
+
+            <div class="ion-padding">
+              <ion-button expand="block" type="submit" [disabled]="!datosUsuarioForm.valid" class="ion-no-margin"><ion-icon slot="start"  name="cloud-upload"></ion-icon> Registrar</ion-button>
+            </div>
+            <ion-progress-bar type="indeterminate" *ngIf="procesando"></ion-progress-bar>
+          </ion-item-group>
+        </form>
+    
+      </div>
+  </ion-content>
+
+  
+  
+

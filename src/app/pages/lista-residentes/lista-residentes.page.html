@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  <ion-title>{{usuario.residencia.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <ion-searchbar [(ngModel)]="buscarQuery" (ionChange)="buscar()" placeholder="Buscar residente"></ion-searchbar>
+    <ion-spinner *ngIf="cargando" style="display: block; margin: auto;" color="primary" name="bubbles"></ion-spinner>
+    <ion-list>
+      <div *ngFor = "let r of residentesBD; let i = index">
+        <ion-item [routerLink]="['/residentes',r.id]" detail="true" *ngIf="r.estatus!='B'">
+      <!--  <ion-item [routerLink]="['/residentes']" detail="true">-->
+          <ion-avatar slot="start">
+            <img *ngIf="r.genero=='femenino'" src="../../../assets/avatarFemenino.png">
+            <img *ngIf="r.genero=='masculino'" src="../../../assets/avatarMasculino.png">
+          </ion-avatar>
+          <ion-label class="ion-text-wrap">
+            <span>{{r.nombre}}</span> &nbsp;&nbsp;<ion-text color="danger"><ion-icon style="vertical-align:-2px; display: inline-block;" *ngIf="r.caso_sospechoso" name="warning"></ion-icon></ion-text>
+            <ion-badge style="vertical-align:-3px; display: inline-block;" color="dark" slot="end" *ngIf="r.estatus=='B'">&nbsp;Baja&nbsp;</ion-badge>
+            <br>
+            <ion-badge color="danger" *ngIf="r.contadores['sintomas'] && r.caso_sospechoso">Síntomas: {{r.contadores['sintomas']}}</ion-badge>
+            <ion-badge color="warning" *ngIf="r.contadores['sintomas'] && !r.caso_sospechoso">Síntomas: {{r.contadores['sintomas']}}</ion-badge>
+            <ion-badge color="success" *ngIf="!r.contadores['sintomas'] && !r.caso_sospechoso">Síntomas: {{r.contadores['sintomas']}}</ion-badge>
+          </ion-label>
+        </ion-item>
+      </div>
+      
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,151 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Antecedentes Clínicos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]= "true">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8" offset="2">
+          <div class="ion-text-center">
+            <p> <ion-text color="primary">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+  
+        <ion-col size="2" offset="5">
+          <ion-img *ngIf="usuario?.genero=='femenino'" src="../../../assets/avatarFemenino.png"></ion-img>
+          <ion-img *ngIf="usuario?.genero=='masculino'" src="../../../assets/avatarMasculino.png"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" offset="2">
+          <div class="ion-text-center">
+            <h3>{{usuario?.nombre}}</h3>
+            <ion-text color="secondary">
+                <h4> {{edad}} años</h4>
+            </ion-text>
+            <p><ion-text color="medium">{{usuario?.residencia.nombre}}</ion-text></p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <div id="container">
+      <form [formGroup]="antecedentesForm" (ngSubmit)="actualizarAntecedentes()">
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label>Antecedentes Clínicos</ion-label>
+          </ion-item-divider>
+  
+          <ion-item>
+            <ion-label>Diabetes</ion-label>
+            <ion-toggle formControlName="diabetes"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Hipertensión arterial</ion-label>
+            <ion-toggle formControlName="hipertension"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Antecedente de infarto al miocardio</ion-label>
+            <ion-toggle formControlName="infarto"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Enfermedad cardiovascular</ion-label>
+            <ion-toggle formControlName="cardiaca"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Uso de inmunosupresores</ion-label>
+            <ion-button fill="clear" size="small" color="dark" (click)="presentPopover(0)">
+              <ion-icon slot="icon-only" name="help-circle"></ion-icon>
+            </ion-button>
+            <ion-toggle formControlName="inmunosupresores"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Enfermedad pulmonar obstructiva crónica</ion-label>
+            <ion-toggle formControlName="pulmonar"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Enfermadad hepática crónica</ion-label>
+            <ion-toggle formControlName="hepatica"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Asma</ion-label>
+            <ion-toggle formControlName="asma"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Enfermedad renal crónica</ion-label>
+            <ion-toggle formControlName="renal"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Tabaquismo activo</ion-label>
+            <ion-toggle formControlName="tabaquismo_activo"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Tabaquismo inactivo</ion-label>
+            <ion-toggle formControlName="tabaquismo_inactivo"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Cáncer en tratamiento</ion-label>
+            <ion-toggle formControlName="cancer"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Infección por VIH</ion-label>
+            <ion-toggle formControlName="vih"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Enfermedad autoinmune</ion-label>
+            <ion-toggle formControlName="autoinmune"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Obesidad/Sobrepeso</ion-label>
+            <ion-toggle formControlName="obesidad"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Demencia diagnosticada</ion-label>
+            <ion-toggle formControlName="demencia"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>¿Es dependiente?</ion-label>
+            <ion-toggle formControlName="dependiente"></ion-toggle>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Deterioro funcional</ion-label>
+            <ion-button fill="clear" size="small" color="dark" (click)="presentPopover(1)">
+              <ion-icon slot="icon-only" name="help-circle"></ion-icon>
+            </ion-button>
+            <ion-toggle formControlName="deterioro_funcional"></ion-toggle>
+          </ion-item>
+  
+          <div class="ion-padding">
+            <ion-button expand="block" type="submit" [disabled]="!antecedentesForm.valid" class="ion-no-margin"><ion-icon slot="start"  name="cloud-upload"></ion-icon> Registrar</ion-button>
+          </div>
+        </ion-item-group>
+      </form>
+  
+    </div>
+  
+  </ion-content>
+  

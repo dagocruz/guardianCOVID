@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Medidas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [fullscreen]= "true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8" offset="2">
+        <div class="ion-text-center">
+          <p> <ion-text color="primary">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+
+      <ion-col size="2" offset="5">
+        <ion-img *ngIf="usuario?.genero=='femenino'" src="../../../assets/avatarFemenino.png"></ion-img>
+        <ion-img *ngIf="usuario?.genero=='masculino'" src="../../../assets/avatarMasculino.png"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8" offset="2">
+        <div class="ion-text-center">
+          <h3>{{usuario?.nombre}}</h3>
+          <ion-text color="secondary">
+              <h4> {{edad}} años</h4>
+          </ion-text>
+          <p><ion-text color="medium">{{usuario?.residencia.nombre}}</ion-text></p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div id="container">
+      <form [formGroup]="datosUsuarioForm" (ngSubmit)="registrarMedidas()">
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label class="ion-text-wrap">¿Has tomado algunas de las siguientes medidas?</ion-label>
+          </ion-item-divider>
+          <div formGroupName="secretaria_salud">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                  Registro como caso sospechoso en <a target="_blank" href="{{ligaCOVIDMX}}">aplicación de la Secretaría de Salud (COVID-19MX)</a>.</ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('secretaria_salud')"></ion-toggle>
+            </ion-item>
+    
+            <ion-item *ngIf="datosUsuarioForm.value.secretaria_salud.valor">
+              <ion-label></ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+            </ion-item>
+          </div>
+          <div formGroupName="consulta_medica">
+            <ion-item>
+              <ion-label class="ion-text-wrap">Consulta médica </ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('consulta_medica')"></ion-toggle>
+            </ion-item>
+    
+            <ion-item *ngIf="datosUsuarioForm.value.consulta_medica.valor">
+              <ion-label></ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button expand="block" type="submit" [disabled]="!datosUsuarioForm.valid" class="ion-no-margin"><ion-icon slot="start"  name="cloud-upload"></ion-icon> Registrar</ion-button>
+          </div>
+        </ion-item-group>
+      </form>
+      
+  </div>
+
+</ion-content>
+

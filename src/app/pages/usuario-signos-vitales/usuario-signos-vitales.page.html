@@ -1,0 +1,122 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mis Signos vitales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8" offset="2">
+        <div class="ion-text-center">
+          <p> <ion-text color="primary">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+
+      <ion-col size="2" offset="5">
+        <ion-img *ngIf="usuario.genero=='femenino'" src="../../../assets/avatarFemenino.png"></ion-img>
+        <ion-img *ngIf="usuario.genero=='masculino'" src="../../../assets/avatarMasculino.png"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8" offset="2">
+        <div class="ion-text-center">
+          <h3>{{usuario?.nombre}}</h3>
+          <ion-text color="secondary">
+              <h4> {{edad}} años</h4>
+          </ion-text>
+          <p><ion-text color="medium">{{usuario?.residencia.nombre}}</ion-text></p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div id="container">
+      <form [formGroup]="datosUsuarioForm" (ngSubmit)="registrarSignosVitales()">
+        <ion-item-group>
+            <ion-item-divider>
+              <ion-label>Signos Vitales</ion-label>
+            </ion-item-divider>
+            <div formGroupName="temperatura">
+              <ion-item>
+                <ion-label position="floating">Temperatura </ion-label>
+                <ion-input type="number" formControlName="valor_1" (ionChange)="checkData('temperatura')"></ion-input>
+              </ion-item>
+      
+              <ion-item *ngIf="datosUsuarioForm.value.temperatura.valor_1">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+            <div formGroupName="pulso">
+              <ion-item>
+                <ion-label position="floating">Pulso </ion-label>
+                <ion-input type="number" formControlName="valor_1" (ionChange)="checkData('pulso')"></ion-input>
+              </ion-item>
+      
+              <ion-item *ngIf="datosUsuarioForm.value.pulso.valor_1">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+            <div formGroupName="frecuencia_respiratoria">
+              <ion-item>
+                <ion-label position="floating">Frecuencia respiratoria </ion-label>
+                <ion-input type="number" formControlName="valor_1" (ionChange)="checkData('frecuencia_respiratoria')"></ion-input>
+              </ion-item>
+      
+              <ion-item *ngIf="datosUsuarioForm.value.frecuencia_respiratoria.valor_1">
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+              </ion-item>
+            </div>
+
+            <ion-row formGroupName="presion_arterial">
+                <ion-item>
+                  <ion-col size="5">
+                      <ion-label>Presión arterial </ion-label>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-input type="number" formControlName="valor_1" placeholder="sistólica" (ionChange)="checkData('presion_arterial')"></ion-input>
+                  </ion-col>
+                  <ion-col size="1" class="ion-text-center">
+                    <ion-text> / </ion-text>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-input type="number"  formControlName="valor_2" placeholder="diastólica"></ion-input>
+                  </ion-col>
+                </ion-item>
+                <ion-col size="12">
+                  <ion-item *ngIf="datosUsuarioForm.value.presion_arterial.valor_1 && datosUsuarioForm.value.presion_arterial.valor_2">
+                    <ion-label></ion-label>
+                    <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+                  </ion-item>
+                </ion-col>
+                
+              </ion-row>
+
+            <div formGroupName="saturacion_oxigeno">
+                <ion-item>
+                  <ion-label position="floating">Saturación de oxígeno</ion-label>
+                  <ion-input type="number" formControlName="valor_1" (ionChange)="checkData('saturacion_oxigeno')"></ion-input>
+                </ion-item>
+        
+                <ion-item *ngIf="datosUsuarioForm.value.saturacion_oxigeno.valor_1">
+                  <ion-label></ion-label>
+                  <ion-datetime displayFormat="DD/MM/YYYY @ H:mm" min="2020-01-01" [max]="getToday()" placeholder="Seleccionar fecha" formControlName="fecha"></ion-datetime>
+                </ion-item>
+              </div>
+
+          <div class="ion-padding">
+            <ion-button expand="block" [disabled]="!datosUsuarioForm.valid" type="submit" class="ion-no-margin"><ion-icon slot="start"  name="cloud-upload"></ion-icon> Registrar</ion-button>
+          </div>
+        </ion-item-group>
+      </form>
+  
+    </div>
+</ion-content>
+

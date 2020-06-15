@@ -1,0 +1,200 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Nuevo Residente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Nuevo Residente</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <div id="container">
+      <form [formGroup]="datosResidenteForm" (ngSubmit)="registrarResidente()">
+        <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Generales</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label position="floating">Nombre <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+        <!--<ion-item>
+          <ion-label position="floating">Edad <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input type="number" formControlName="edad"></ion-input>
+        </ion-item>-->
+        <ion-item>
+            <ion-label position="floating">Fecha de nacimiento <ion-text color="danger">*</ion-text></ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" [max]="getToday()" formControlName="fecha_nacimiento"></ion-datetime>
+          </ion-item>
+        <ion-item>
+          <ion-label>Género <ion-text color="danger">*</ion-text></ion-label>
+          <ion-radio-group formControlName="genero">
+            <ion-item>
+              <ion-label>Femenino</ion-label>
+              <ion-radio slot="start" value="femenino"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Masculino</ion-label>
+              <ion-radio slot="start" value="masculino"></ion-radio>
+            </ion-item> 
+          </ion-radio-group>
+        </ion-item>
+
+        <ion-item-divider>
+          <ion-label>Antecedentes Clínicos</ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label>Diabetes</ion-label>
+          <ion-toggle formControlName="diabetes"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Hipertensión arterial</ion-label>
+          <ion-toggle formControlName="hipertension"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Antecedente de infarto al miocardio</ion-label>
+          <ion-toggle formControlName="infarto"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Enfermedad cardiovascular</ion-label>
+          <ion-toggle formControlName="cardiaca"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Uso de inmunosupresores</ion-label>
+          <ion-button fill="clear" size="small" color="dark" (click)="presentPopover(0)">
+            <ion-icon slot="icon-only" name="help-circle"></ion-icon>
+          </ion-button>
+          <ion-toggle formControlName="inmunosupresores"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Enfermedad pulmonar obstructiva crónica</ion-label>
+          <ion-toggle formControlName="pulmonar"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Enfermadad hepática crónica</ion-label>
+          <ion-toggle formControlName="hepatica"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Asma</ion-label>
+          <ion-toggle formControlName="asma"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Enfermedad renal crónica</ion-label>
+          <ion-toggle formControlName="renal"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Tabaquismo activo</ion-label>
+          <ion-toggle formControlName="tabaquismo_activo"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Tabaquismo inactivo</ion-label>
+          <ion-toggle formControlName="tabaquismo_inactivo"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cáncer en tratamiento</ion-label>
+          <ion-toggle formControlName="cancer"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Infección por VIH</ion-label>
+          <ion-toggle formControlName="vih"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Enfermedad autoinmune</ion-label>
+          <ion-toggle formControlName="autoinmune"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Obesidad</ion-label>
+          <ion-toggle formControlName="obesidad"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Demencia</ion-label>
+          <ion-toggle formControlName="demencia"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>¿Es dependiente?</ion-label>
+          <ion-toggle formControlName="dependiente"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Deterioro funcional</ion-label>
+          <ion-button fill="clear" size="small" color="dark" (click)="presentPopover(1)">
+            <ion-icon slot="icon-only" name="help-circle"></ion-icon>
+          </ion-button>
+          <ion-toggle formControlName="deterioro_funcional"></ion-toggle>
+        </ion-item>
+
+
+        <!--<ion-item-divider>
+          <ion-label>¿Ha presentado alguno de los siguientes síntomas?</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>Tos</ion-label>
+          <ion-toggle formControlName="tos"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="datosResidenteForm.value.tos">
+          <ion-label>Inicio de tos</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" min="2020-01-01" [max]="today" placeholder="Seleccionar fecha" formControlName="inicioTos"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Fatiga</ion-label>
+          <ion-toggle formControlName="fatiga"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="datosResidenteForm.value.fatiga">
+            <ion-label>Inicio de fatiga</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" min="2020-01-01" [max]="today" placeholder="Seleccionar fecha" formControlName="inicioFatiga"></ion-datetime>
+          </ion-item>
+
+        <ion-item>
+          <ion-label>Fiebre</ion-label>
+          <ion-toggle formControlName="fiebre"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="datosResidenteForm.value.fiebre">
+            <ion-label>Inicio de fiebre</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" min="2020-01-01" [max]="today" placeholder="Seleccionar fecha" formControlName="inicioFiebre"></ion-datetime>
+          </ion-item>
+
+        <ion-item>
+          <ion-label>Dificultad para respirar</ion-label>
+          <ion-toggle formControlName="dificultad_respirar"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="datosResidenteForm.value.dificultad_respirar">
+            <ion-label>Inicio de dificultad para respirar</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" min="2020-01-01" [max]="today" placeholder="Seleccionar fecha" formControlName="inicioDificultadRespirar"></ion-datetime>
+          </ion-item>-->
+        <div class="ion-padding">
+          <ion-button class="ion-no-margin" expand="block" type="submit" [disabled]="!datosResidenteForm.valid"><ion-icon slot="start"  name="cloud-upload"></ion-icon> Registrar</ion-button>
+        </div>
+        </ion-item-group>
+      </form>
+  
+    </div>
+  </ion-content>

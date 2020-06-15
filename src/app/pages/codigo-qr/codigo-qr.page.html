@@ -1,0 +1,214 @@
+<ion-header translucent>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Código QR</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [fullscreen]="true">
+  <!--<ion-grid>
+    <ion-row [ngStyle]="{'background-color': infoQR?.data.color}" >
+      <ion-col size="8" offset="2">
+        <div class="ion-text-center">
+          <h3>{{usuario?.nombre}}</h3>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row [ngStyle]="{'background-color': infoQR?.data.color}">
+        <ion-col size="10" offset="1">
+          <div class="ion-text-center" *ngIf="infoQR?.creado">
+              <qrcode [qrdata]="qrData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+              <h4 *ngIf="infoQR['creado']">Expira en: {{tiempoExpiracion}}</h4>
+          </div>
+          
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+  <div id="container">
+      <form [formGroup]="datosUsuarioForm" (ngSubmit)="generarCodigo()">
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label>¿Ha presentado alguno de los siguientes síntomas?</ion-label>
+          </ion-item-divider>
+          <div formGroupName="tos">
+            <ion-item>
+              <ion-label>Tos </ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('tos')"></ion-toggle>
+            </ion-item>
+          </div>
+
+            
+          <div formGroupName="fiebre">
+            <ion-item>
+              <ion-label>Fiebre </ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('fiebre')"></ion-toggle>
+            </ion-item>
+          </div>
+
+          <div formGroupName="dolor_cabeza">
+              <ion-item>
+                <ion-label>Dolor de cabeza </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('dolor_cabeza')"></ion-toggle>
+              </ion-item>
+            </div>
+
+          <div formGroupName="dificultad_respirar">
+            <ion-item>
+              <ion-label>Dificultad para respirar </ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('dificultad_respirar')"></ion-toggle>
+            </ion-item>
+          </div>
+
+          <div formGroupName="odinofagia">
+            <ion-item>
+              <ion-label>Dolor o ardor de garganta (odinofagia) </ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('odinofagia')"></ion-toggle>
+            </ion-item>
+          </div>
+
+          <div formGroupName="rinorrea">
+            <ion-item>
+              <ion-label>Escurrimiento nasal (rinorrea) </ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('rinorrea')"></ion-toggle>
+            </ion-item>
+          </div>
+
+          <div formGroupName="conjuntivitis">
+            <ion-item>
+              <ion-label>Irritación y ardor de los ojos (conjuntivitis) </ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('conjuntivitis')"></ion-toggle>
+            </ion-item>
+          </div>
+
+          <div formGroupName="mialgias">
+            <ion-item>
+              <ion-label>Cuerpo cortado/Dolor muscular (mialgias) </ion-label>
+              <ion-toggle formControlName="valor" (ionChange)="checkData('mialgias')"></ion-toggle>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button expand="block" type="submit" [disabled]="!datosUsuarioForm.valid" class="ion-no-margin"><ion-icon slot="start"  name="qr-code-outline"></ion-icon> Generar QR</ion-button>
+          </div>
+        </ion-item-group>
+      </form>
+  </div>-->
+  <ion-slides #slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-content id="container">
+          <ion-grid>
+            <ion-row [ngStyle]="{'background-color': infoQR?.data.color}" >
+              <ion-col size="10" offset="1">
+                <div class="ion-text-center">
+                  <h3>{{usuario?.nombre}}</h3>
+                </div>
+              </ion-col>
+            </ion-row>
+        <ion-row>
+        <ion-col size="12">
+        <form [formGroup]="datosUsuarioForm" (ngSubmit)="generarCodigo()">
+          <ion-item-group>
+            <ion-item-divider>
+              <ion-label>¿Ha presentado alguno de los siguientes síntomas?</ion-label>
+            </ion-item-divider>
+            <div formGroupName="tos">
+              <ion-item>
+                <ion-label>Tos </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('tos')"></ion-toggle>
+              </ion-item>
+            </div>
+  
+              
+            <div formGroupName="fiebre">
+              <ion-item>
+                <ion-label>Fiebre </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('fiebre')"></ion-toggle>
+              </ion-item>
+            </div>
+  
+            <div formGroupName="dolor_cabeza">
+                <ion-item>
+                  <ion-label>Dolor de cabeza </ion-label>
+                  <ion-toggle formControlName="valor" (ionChange)="checkData('dolor_cabeza')"></ion-toggle>
+                </ion-item>
+              </div>
+  
+            <div formGroupName="dificultad_respirar">
+              <ion-item>
+                <ion-label>Dificultad para respirar </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('dificultad_respirar')"></ion-toggle>
+              </ion-item>
+            </div>
+  
+            <div formGroupName="odinofagia">
+              <ion-item>
+                <ion-label>Dolor o ardor de garganta (odinofagia) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('odinofagia')"></ion-toggle>
+              </ion-item>
+            </div>
+  
+            <div formGroupName="rinorrea">
+              <ion-item>
+                <ion-label>Escurrimiento nasal (rinorrea) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('rinorrea')"></ion-toggle>
+              </ion-item>
+            </div>
+  
+            <div formGroupName="conjuntivitis">
+              <ion-item>
+                <ion-label>Irritación y ardor de los ojos (conjuntivitis) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('conjuntivitis')"></ion-toggle>
+              </ion-item>
+            </div>
+  
+            <div formGroupName="mialgias">
+              <ion-item>
+                <ion-label>Cuerpo cortado/Dolor muscular (mialgias) </ion-label>
+                <ion-toggle formControlName="valor" (ionChange)="checkData('mialgias')"></ion-toggle>
+              </ion-item>
+            </div>
+            <div class="ion-padding">
+              <ion-button expand="block" type="submit" [disabled]="!datosUsuarioForm.valid" class="ion-no-margin"><ion-icon slot="start"  name="qr-code-outline"></ion-icon> Generar QR</ion-button>
+            </div>
+          </ion-item-group>
+        </form>
+        </ion-col>
+        </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ion-slide>
+    <ion-slide>
+      <ion-content >
+      <div [ngStyle]="{'background-color': infoQR?.data.color,'height':'100%'}">
+      <ion-grid>
+        <ion-row *ngIf="infoQR?.creado">
+          <ion-col size="8" offset="2">
+            <br>
+            <br>
+            <div class="ion-text-center">
+              <ion-text color="light"><h4><strong>Expira en: {{tiempoExpiracion}}</strong></h4></ion-text>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="!infoQR?.creado">
+          <ion-col size="8" offset="2">
+            <div class="ion-text-center">
+              <h3>Ningún código QR activo</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="infoQR?.creado">
+            <ion-col size="10" offset="1">
+              <div class="ion-text-center" >
+                  <qrcode [qrdata]="qrData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+              </div>
+              <ion-text color="light"><strong><p style="font-size: 70%;">El código es válido por 2 horas desde su creación. </p></strong></ion-text>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+    </div>
+    </ion-content>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
