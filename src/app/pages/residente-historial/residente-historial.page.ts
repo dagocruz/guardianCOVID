@@ -890,7 +890,7 @@ export class ResidenteHistorialPage implements OnInit {
                 labelString:'presión arterial (mmHg)'
               },
               ticks:{
-                min:60,
+                min:40,
                 max:180
               }
             }]

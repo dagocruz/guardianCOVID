@@ -28,7 +28,9 @@ export class ResidentesService {
   //residente = null;
   public residente:Residente;
   
-  constructor(private http: HttpClient,private alertController: AlertController) { }
+  constructor(
+    private http: HttpClient,
+    private alertController: AlertController) { }
 
   getResidentes(residencia) {
     return this.http.get(`${this.url_REST}/residentes?id_residencia=${residencia}&pp=100000`).pipe(

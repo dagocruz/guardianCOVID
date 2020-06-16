@@ -1,3 +1,4 @@
+import { ColaboradoresService } from './../../services/colaboradores.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
 import { AuthService } from "../../services/auth.service";
@@ -36,14 +37,13 @@ export type ChartOptions = {
   legend:ApexLegend
 };
 
-
 @Component({
-  selector: 'app-usuario-historial',
-  templateUrl: './usuario-historial.page.html',
-  styleUrls: ['./usuario-historial.page.scss'],
+  selector: 'app-colaborador-historial',
+  templateUrl: './colaborador-historial.page.html',
+  styleUrls: ['./colaborador-historial.page.scss'],
 })
-export class UsuarioHistorialPage implements OnInit {
-  
+export class ColaboradorHistorialPage implements OnInit {
+
   @ViewChild('canvasTemperatura', {static:false}) canvasTemperatura;
   @ViewChild('canvasPulso', {static:false}) canvasPulso;
   @ViewChild('canvasFrecuencia', {static:false}) canvasFrecuencia;
@@ -219,6 +219,7 @@ export class UsuarioHistorialPage implements OnInit {
 
   constructor(
     private authService: AuthService, 
+    private colaboradoresService: ColaboradoresService,
     private storage: Storage,
     private toastController: ToastController,
     private popOverController: PopoverController
@@ -226,8 +227,8 @@ export class UsuarioHistorialPage implements OnInit {
 
   ngOnInit() {
     
-    this.authService.getUsuarioData().subscribe(usuario => {
-      this.authService.usuario = usuario['data'];
+    this.colaboradoresService.getColaborador(this.colaboradoresService.colaborador.id).subscribe(usuario => {
+      this.colaboradoresService.colaborador = usuario['data'];
       this.usuario = usuario['data'];
       this.edad = moment().diff(moment(this.usuario.fecha_nacimiento),'year');
       //console.log('OnInit: '+this.authService.usuario);
@@ -241,9 +242,9 @@ export class UsuarioHistorialPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log(this.authService.usuario);
-    if(this.authService.usuario){
-      this.usuario = this.authService.usuario;
+    console.log(this.colaboradoresService.colaborador);
+    if(this.colaboradoresService.colaborador){
+      this.usuario = this.colaboradoresService.colaborador;
       this.edad = moment().diff(moment(this.usuario.fecha_nacimiento),'year');
       //this.actualizarDatosGraficas();
       //this.crearGraficaSintomasCOVID();

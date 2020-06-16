@@ -1,15 +1,17 @@
+import { ColaboradoresService } from './../../services/colaboradores.service';
 import { Router,NavigationEnd, NavigationStart } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Residente } from "../../models/Residente";
 import { ResidentesService } from "../../services/residentes.service";
 import { filter } from 'rxjs/operators'
+
 @Component({
-  selector: 'app-lista-residentes',
-  templateUrl: './lista-residentes.page.html',
-  styleUrls: ['./lista-residentes.page.scss'],
+  selector: 'app-lista-colaboradores',
+  templateUrl: './lista-colaboradores.page.html',
+  styleUrls: ['./lista-colaboradores.page.scss'],
 })
-export class ListaResidentesPage implements OnInit {
+export class ListaColaboradoresPage implements OnInit {
 
   residentes:any;
   residentesBD:any;
@@ -19,6 +21,7 @@ export class ListaResidentesPage implements OnInit {
   constructor(
     private residentesService: ResidentesService, 
     private authService: AuthService,
+    private colaboradoresService: ColaboradoresService,
     private router:Router) { this.onViewEnter() }
 
 
@@ -26,11 +29,12 @@ export class ListaResidentesPage implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((route: NavigationEnd) => {
-        console.log('Route: '+route.url)
-        if(route.url == '/home-residentes'){
+        //console.log('Route: '+route.url)
+        if(route.url == '/home-colaboradores'){
           this.cargando = true;
           this.residentes = this.residentesBD = null;
-          this.residentesService.getResidentes(this.usuario.residencias[0].id).subscribe(residentes => {
+          //console.log(this.usuario.id);
+          this.colaboradoresService.getColaboradores(this.usuario.residencias[0].id).subscribe(residentes => {
             this.cargando = false;
             this.residentes = this.residentesBD = residentes['data'];
             //console.log(this.residentes);
@@ -73,7 +77,7 @@ export class ListaResidentesPage implements OnInit {
   }
 
   buscar(){
-    console.log(this.buscarQuery);
+    //console.log(this.buscarQuery);
     this.residentesBD = this.residentes.filter(item => item.nombre.toLowerCase().includes(this.buscarQuery.toLowerCase()));
   }
 

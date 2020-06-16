@@ -117,10 +117,10 @@ export class ResidenteSintomasPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log('didEnter');
+    //console.log('didEnter');
     this.usuario = this.residenteService.residente;
     this.edad = moment().diff(moment(this.usuario.fecha_nacimiento),'year');
-    console.log(this.usuario);
+    //console.log(this.usuario);
     this.fecha = Date.now();
     this.today = moment().format(); 
     this.procesando = false;
@@ -136,8 +136,8 @@ export class ResidenteSintomasPage implements OnInit {
       //console.log(this.datosUsuarioForm.value);
       if(this.datosUsuarioForm.value.hasOwnProperty(key)){
         let array_key = this.usuario.sintomas_covid[key];
-        console.log(key);
-        console.log(array_key[array_key.length-1].valor);
+        //console.log(key);
+        //console.log(array_key[array_key.length-1].valor);
         //this.datosUsuarioForm.controls[key].setValue({valor:array_key[array_key.length-1].valor, fecha:{value:array_key[array_key.length-1].fecha}});
         this.datosUsuarioForm.get(`${key}.valor`).setValue(array_key[array_key.length-1].valor);
         this.datosUsuarioForm.get(`${key}.fecha`).setValue(array_key[array_key.length-1].fecha);

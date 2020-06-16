@@ -45,6 +45,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/residente-info/residente-info.module').then( m => m.ResidenteInfoPageModule)
   },
   {
+    path: 'colaboradores/:id',
+    //path: 'residentes',
+    loadChildren: () => import('./pages/colaborador-info/colaborador-info.module').then( m => m.ColaboradorInfoPageModule)
+  },
+  {
     path: 'residente-valoracion',
     loadChildren: () => import('./pages/residente-valoracion/residente-valoracion.module').then( m => m.ResidenteValoracionPageModule)
   },
@@ -96,6 +101,26 @@ const routes: Routes = [
   {
     path: 'codigo-qr',
     loadChildren: () => import('./pages/codigo-qr/codigo-qr.module').then( m => m.CodigoQrPageModule)
+  },
+  {
+    path: 'home-colaboradores',
+    loadChildren: () => import('./pages/home-colaboradores/home-colaboradores.module').then( m => m.HomeColaboradoresPageModule)
+  },
+  {
+    path: 'lista-colaboradores',
+    loadChildren: () => import('./pages/lista-colaboradores/lista-colaboradores.module').then( m => m.ListaColaboradoresPageModule)
+  },
+  {
+    path: 'colaborador-info',
+    loadChildren: () => import('./pages/colaborador-info/colaborador-info.module').then( m => m.ColaboradorInfoPageModule)
+  },
+  {
+    path: 'colaborador-historial',
+    loadChildren: () => import('./pages/colaborador-historial/colaborador-historial.module').then( m => m.ColaboradorHistorialPageModule)
+  },
+  {
+    path: 'codigo-qr-colaborador',
+    loadChildren: () => import('./pages/codigo-qr-colaborador/codigo-qr-colaborador.module').then( m => m.CodigoQrColaboradorPageModule)
   }
 ];
 

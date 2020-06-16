@@ -1,3 +1,4 @@
+import { ColaboradoresService } from './../../services/colaboradores.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
@@ -6,12 +7,13 @@ import { timer, Subscription } from "rxjs";
 
 import * as moment from "moment";
 
+
 @Component({
-  selector: 'app-codigo-qr',
-  templateUrl: './codigo-qr.page.html',
-  styleUrls: ['./codigo-qr.page.scss'],
+  selector: 'app-codigo-qr-colaborador',
+  templateUrl: './codigo-qr-colaborador.page.html',
+  styleUrls: ['./codigo-qr-colaborador.page.scss'],
 })
-export class CodigoQrPage implements OnInit {
+export class CodigoQrColaboradorPage implements OnInit {
 
   @ViewChild('slides', {static: true}) slides: IonSlides;
 
@@ -31,6 +33,10 @@ export class CodigoQrPage implements OnInit {
   tiempoActual:any;
   countDown:Subscription;
   tiempoExpiracion:any;
+  slideOpts2 = {
+    initialSlide: 0,
+    speed: 400
+  };
   slideOpts = {
     initialSlide: 0,
     speed: 600,
@@ -124,13 +130,16 @@ export class CodigoQrPage implements OnInit {
     private formBuilder: FormBuilder, 
     private authService:AuthService,
     private toastController: ToastController,
+    private colaboradoresService: ColaboradoresService
 
   ) { 
    }
 
   ngOnInit() {
 
-    this.authService.getQR().subscribe(qrs => {
+    this.usuario = this.colaboradoresService.colaborador;
+
+    this.colaboradoresService.getQR(this.usuario.id).subscribe(qrs => {
       //console.log('getQR');
       //console.log(qrs);
       if(qrs['data'].length){
@@ -140,8 +149,8 @@ export class CodigoQrPage implements OnInit {
         //console.log(moment().format());
         //console.log(duration/1000);
         if((duration-1000) > 1){
-          this.authService.infoQR = qrs['data'][0];
-          this.infoQR = this.authService.infoQR;
+          this.colaboradoresService.infoQR = qrs['data'][0];
+          this.infoQR = this.colaboradoresService.infoQR;
           this.qrData = JSON.stringify({id_QR:this.infoQR['id'],fecha_expiracion:this.infoQR['fecha_expiracion']});
           this.infoQR['creado'] = true;
           this.slides.slideTo(1);
@@ -159,7 +168,7 @@ export class CodigoQrPage implements OnInit {
         }
       }
     });
-    this.usuario = this.authService.usuario;
+    
     
     this.datosUsuarioForm = this.formBuilder.group({
       tos:this.formBuilder.group({
@@ -296,15 +305,15 @@ export class CodigoQrPage implements OnInit {
         if(Object.keys(this.dataTemperatura).length){
           this.authService.registrarSignosVitales(this.usuario.id,{data:this.dataTemperatura}).subscribe(u2 => {
             this.registrarCodigoQR();
-            this.authService.usuario = u2['data'];
-            this.usuario = u2['data'];
+            this.colaboradoresService.colaborador = u2['data'];
+            this.usuario = this.colaboradoresService.colaborador;
             this.actualizarSintomas();
 
           });
         }
         else{
           this.registrarCodigoQR();
-          this.authService.usuario = u['data'];
+          this.colaboradoresService.colaborador = u['data'];
           this.usuario = u['data'];
           this.actualizarSintomas();
         }
@@ -314,7 +323,7 @@ export class CodigoQrPage implements OnInit {
       if(Object.keys(this.dataTemperatura).length){
         this.authService.registrarSignosVitales(this.usuario.id,{data:this.dataTemperatura}).subscribe(u2 => {
           this.registrarCodigoQR();
-          this.authService.usuario = u2['data'];
+          this.colaboradoresService.colaborador = u2['data'];
           this.usuario = u2['data'];
           this.actualizarSintomas();
 
@@ -349,10 +358,12 @@ export class CodigoQrPage implements OnInit {
     var data= {};
     data['fecha_expiracion'] = moment().add(2,'hours').format();
     data['data'] = {color:this.color};
-    this.authService.registrarQR({data:data}).subscribe(dataQR =>{
-      //console.log(dataQR);
-      this.authService.infoQR = dataQR['data'];
-      this.infoQR = this.authService.infoQR;
+    //data['usuario'] = {id:this.usuario.id,nombre:this.usuario.nombre};
+    
+    this.colaboradoresService.registrarQR({data:data},this.usuario.id).subscribe(dataQR =>{
+      console.log(dataQR);
+      this.colaboradoresService.infoQR = dataQR['data'];
+      this.infoQR = this.colaboradoresService.infoQR;
       this.infoQR['creado'] = true;
       this.qrData = JSON.stringify({id_QR:this.infoQR['id'],fecha:this.infoQR['fecha_expiracion']});
 
@@ -390,7 +401,7 @@ export class CodigoQrPage implements OnInit {
         this.countDown.unsubscribe();
         this.countDown = null;
        }    
-      var duration:any = moment.duration((moment(this.authService.infoQR['fecha_expiracion']).valueOf()-moment().valueOf()),'milliseconds');
+      var duration:any = moment.duration((moment(this.colaboradoresService.infoQR['fecha_expiracion']).valueOf()-moment().valueOf()),'milliseconds');
       //console.log(moment(this.authService.infoQR['expiracion']).format());
       //console.log(moment().format()); 
       

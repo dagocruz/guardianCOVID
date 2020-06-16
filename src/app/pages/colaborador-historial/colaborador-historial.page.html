@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Historial</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true">
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button routerLink="/codigo-qr-colaborador" routerDirection="forward" fill="outline">
+        <ion-icon name="qr-code-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8" offset="2">
+          <div class="ion-text-center">
+            <p> <ion-text color="primary">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+  
+        <ion-col size="2" offset="5">
+          <ion-img *ngIf="usuario?.genero=='femenino'" src="../../../assets/avatarFemenino.png"></ion-img>
+          <ion-img *ngIf="usuario?.genero=='masculino'" src="../../../assets/avatarMasculino.png"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" offset="2">
+          <div class="ion-text-center">
+            <h3>{{usuario?.nombre}}</h3>
+            <ion-text color="secondary">
+                <h4> {{edad}} años</h4>
+            </ion-text>
+            <p><ion-text color="medium">{{usuario?.residencias[0].nombre}}</ion-text></p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Historial de</ion-card-subtitle>
+        <ion-card-title>Síntomas COVID-19</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div id="chart" *ngIf="this.graficaSintomas?.series.length">
+          <apx-chart
+          [series]="graficaSintomas?.series"
+          [chart]="graficaSintomas?.chart"
+          [dataLabels]="graficaSintomas?.dataLabels"
+          [title]="graficaSintomas?.title"
+          [colors]="graficaSintomas?.colors"
+          [stroke]="graficaSintomas?.stroke"
+          [plotOptions]="graficaSintomas?.plotOptions"
+          [yaxis]="graficaSintomas?.yAxis"
+          [xaxis]="graficaSintomas?.xAxis"
+          [tooltip]="graficaSintomas?.tooltip"
+          [legend]="graficaSintomas?.legend"></apx-chart>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Historial de</ion-card-subtitle>
+        <ion-card-title>Signos vitales</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text *ngIf="!this.usuario?.signos_vitales['temperatura']" color="medium" style="vertical-align: middle; display: inline-block;"><ion-icon name="file-tray-outline" style="vertical-align: middle; display: inline-block;"></ion-icon>&nbsp;No hay registros de <strong>temperatura</strong></ion-text>
+        <canvas  #canvasTemperatura></canvas>
+        <ion-text *ngIf="!this.usuario?.signos_vitales['pulso']" color="medium" style="vertical-align: middle; display: inline-block;"><ion-icon name="file-tray-outline" style="vertical-align: middle; display: inline-block;"></ion-icon>&nbsp;No hay registros de <strong>pulso</strong></ion-text>
+        <canvas  #canvasPulso></canvas>
+        <ion-text *ngIf="!this.usuario?.signos_vitales['frecuencia_respiratoria']" color="medium" style="vertical-align: middle; display: inline-block;"><ion-icon name="file-tray-outline" style="vertical-align: middle; display: inline-block;"></ion-icon>&nbsp;No hay registros de <strong>frecuencia respiratoria</strong></ion-text>
+        <canvas  #canvasFrecuencia></canvas>
+        <ion-text *ngIf="!this.usuario?.signos_vitales['presion_arterial']" color="medium" style="vertical-align: middle; display: inline-block;"><ion-icon name="file-tray-outline" style="vertical-align: middle; display: inline-block;"></ion-icon>&nbsp;No hay registros de <strong>presión arterial</strong></ion-text>
+        <canvas  #canvasPresion></canvas>
+        <ion-text *ngIf="!this.usuario?.signos_vitales['saturacion_oxigeno']" color="medium" style="vertical-align: middle; display: inline-block;"><ion-icon name="file-tray-outline" style="vertical-align: middle; display: inline-block;"></ion-icon>&nbsp;No hay registros de <strong>saturación de oxígeno</strong></ion-text>
+        <canvas  #canvasSaturacion></canvas>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  

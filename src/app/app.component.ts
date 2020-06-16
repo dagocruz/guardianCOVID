@@ -58,6 +58,13 @@ export class AppComponent implements OnInit {
           this.authService.getUsuarioData().subscribe(usuario => {
             //console.log(usuario['data']);
             this.authService.usuario = usuario['data'];
+            if(this.authService.usuario.tipo=='superadmin' || this.authService.usuario.tipo=='administrador'){
+              this.appPages.splice(1,0,{
+                title: 'Colaboradores',
+                url: 'home-colaboradores',
+                icon: 'people-circle'
+              });
+            }
 
             this.selectedIndex = 0; 
             this.router.navigate(['home-usuario'],{ replaceUrl: true });   
