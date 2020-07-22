@@ -7,7 +7,7 @@ import { Storage } from "@ionic/storage";
 import { Chart } from "chart.js";
 import * as moment from "moment";
 
-import { ToastController, PopoverController } from '@ionic/angular';
+import { ToastController, PopoverController, NavController } from '@ionic/angular';
 
 import {
   ChartComponent,
@@ -222,7 +222,8 @@ export class ColaboradorHistorialPage implements OnInit {
     private colaboradoresService: ColaboradoresService,
     private storage: Storage,
     private toastController: ToastController,
-    private popOverController: PopoverController
+    private popOverController: PopoverController,
+    private navController: NavController
   ) { moment.locale('es'); }
 
   ngOnInit() {
@@ -239,6 +240,10 @@ export class ColaboradorHistorialPage implements OnInit {
       this.crearGraficasSignosVitales();
       this.actualizarDatosSintomas();
     });
+  }
+
+  ionViewWillEnter(){
+   console.log('ionviewwillenter');
   }
 
   ionViewDidEnter() {
@@ -513,6 +518,12 @@ export class ColaboradorHistorialPage implements OnInit {
 
   pantallaQR(){
     console.log('entrar QR');
+  }
+
+  forward(uri){
+    console.log('forward');
+    this.navController.navigateForward([uri]);
+    //this,this.navController.navigateRoot
   }
 
 }

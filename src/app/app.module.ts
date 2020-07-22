@@ -1,3 +1,4 @@
+import { PopoverCodigoColoresComponent } from './components/popover-codigo-colores/popover-codigo-colores.component';
 import { AyudaAntecedenteComponent } from './components/ayuda-antecedente/ayuda-antecedente.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { Storage, IonicStorageModule } from "@ionic/storage";
 import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
+import { BarcodeScanner,BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
 
 
 export function jwtOptionsFactory(storage){
@@ -20,13 +22,13 @@ export function jwtOptionsFactory(storage){
     tokenGetter: () => {
       return storage.get('access_token');
     },
-    whitelistedDomains: ['localhost:3000','192.168.1.73:3000','159.65.71.190','159.65.71.190:3000', 'inger.cicese.mx']
+    whitelistedDomains: ['localhost:3000','192.168.1.73:3000','159.65.71.190','159.65.71.190:3000', 'inger.cicese.mx', 'guardiancovid.cicese.mx/']
   }
 }
 
 @NgModule({
-  declarations: [AppComponent, AyudaAntecedenteComponent],
-  entryComponents: [AyudaAntecedenteComponent],
+  declarations: [AppComponent, AyudaAntecedenteComponent, PopoverCodigoColoresComponent],
+  entryComponents: [AyudaAntecedenteComponent, PopoverCodigoColoresComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
@@ -41,6 +43,7 @@ export function jwtOptionsFactory(storage){
   providers: [
     StatusBar,
     SplashScreen,
+    BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

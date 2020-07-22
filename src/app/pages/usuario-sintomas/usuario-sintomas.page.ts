@@ -147,7 +147,7 @@ export class UsuarioSintomasPage implements OnInit {
      this.datosUsuarioForm.controls['hipoxemia']['controls']['valor'].disable();
      this.datosUsuarioForm.controls['hipoxemia']['controls']['fecha'].disable();
      
-     //console.log(this.usuario.cam);
+     /*console.log(this.usuario.cam);
      if(this.usuario.cam.length){
       this.datosUsuarioForm.get(`cam.criterio_1`).setValue(this.usuario.cam[this.usuario.cam.length-1].criterio_1);
       this.datosUsuarioForm.get(`cam.criterio_2`).setValue(this.usuario.cam[this.usuario.cam.length-1].criterio_2);
@@ -158,7 +158,7 @@ export class UsuarioSintomasPage implements OnInit {
 
       this.sintomas['cam'] = this.usuario.cam[this.usuario.cam.length-1];
 
-     }
+     }*/
     //console.log(this.datosUsuarioForm.value);
   }
 

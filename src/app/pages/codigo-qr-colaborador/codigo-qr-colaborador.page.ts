@@ -2,7 +2,7 @@ import { ColaboradoresService } from './../../services/colaboradores.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ToastController, PopoverController, IonSlides } from '@ionic/angular';
+import { ToastController, PopoverController, IonSlides, NavController } from '@ionic/angular';
 import { timer, Subscription } from "rxjs";
 
 import * as moment from "moment";
@@ -130,7 +130,8 @@ export class CodigoQrColaboradorPage implements OnInit {
     private formBuilder: FormBuilder, 
     private authService:AuthService,
     private toastController: ToastController,
-    private colaboradoresService: ColaboradoresService
+    private colaboradoresService: ColaboradoresService,
+    private navController: NavController
 
   ) { 
    }
@@ -425,6 +426,11 @@ export class CodigoQrColaboradorPage implements OnInit {
         }
       });
     }
+  }
+
+  back(){
+    console.log('back');
+    this.navController.navigateForward([`/colaboradores/${this.usuario.id}`]);
   }
 
 }

@@ -6,7 +6,13 @@ import { ColaboradorHistorialPage } from './colaborador-historial.page';
 const routes: Routes = [
   {
     path: '',
-    component: ColaboradorHistorialPage
+    component: ColaboradorHistorialPage,
+    children:[
+      {
+        path:'qr',
+        loadChildren: () => import('../codigo-qr-colaborador/codigo-qr-colaborador.module').then(m => m.CodigoQrColaboradorPageModule)
+      }
+    ]
   }
 ];
 

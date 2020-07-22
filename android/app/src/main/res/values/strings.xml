@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">CLP COVID MX</string>
-    <string name="title_activity_main">CLP COVID MX</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">guardianCOVID</string>
+    <string name="title_activity_main">guardianCOVID</string>
+    <string name="package_name">cicese.guardian.covid</string>
+    <string name="custom_url_scheme">cicese.guardian.covid</string>
 </resources>

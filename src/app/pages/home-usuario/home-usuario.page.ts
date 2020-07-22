@@ -1,11 +1,12 @@
 import { ColaboradoresService } from './../../services/colaboradores.service';
 import { ResidentesService } from 'src/app/services/residentes.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router,NavigationEnd, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators'
 
 import { AuthService } from "../../services/auth.service";
 import { Storage } from "@ionic/storage";
+import { IonTabs } from "@ionic/angular";
 
 
 @Component({
@@ -15,6 +16,8 @@ import { Storage } from "@ionic/storage";
 })
 export class HomeUsuarioPage implements OnInit {
 
+  @ViewChild('tabs', {static:false}) tabs: IonTabs;
+  selectedTab = 'historial';
   constructor( 
     private residentesService: ResidentesService,
     private colaboradoresService: ColaboradoresService,
@@ -23,6 +26,11 @@ export class HomeUsuarioPage implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  setActiveTab(){
+    //console.log(this.tabs.getSelected());
+    this.selectedTab = this.tabs.getSelected();
   }
 
 

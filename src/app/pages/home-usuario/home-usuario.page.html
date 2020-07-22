@@ -1,29 +1,29 @@
-<ion-tabs>
+<ion-tabs #tabs (ionTabsDidChange)="setActiveTab()">
   <ion-tab-bar slot="bottom">
 
     <ion-tab-button tab="historial">
       <ion-icon name="analytics-outline"></ion-icon>
-      <!-- <ion-label>Historial</ion-label> -->
+      <ion-label *ngIf="selectedTab=='historial'">Historial</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="signos">
       <ion-icon name="fitness-outline"></ion-icon>
-      <!-- <ion-label>Signos vitales</ion-label> -->
+      <ion-label *ngIf="selectedTab=='signos'">Signos vitales</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="sintomas">
       <ion-icon name="thermometer-outline"></ion-icon>
-      <!-- <ion-label>Síntomas</ion-label> -->
+      <ion-label *ngIf="selectedTab=='sintomas'">Síntomas</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="antecedentes">
       <ion-icon name="list-circle-outline"></ion-icon>
-      <!-- <ion-label>Antecedentes</ion-label> -->
+      <ion-label *ngIf="selectedTab=='antecedentes'">Antecedentes</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="medidas">
         <ion-icon name="medkit-outline"></ion-icon>
-        <!-- <ion-label>Medidas</ion-label> -->
+        <ion-label *ngIf="selectedTab=='medidas'">Medidas</ion-label>
       </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

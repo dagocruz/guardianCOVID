@@ -122,29 +122,29 @@ export class UsuarioHistorialPage implements OnInit {
     temperatura: {
       label:'Temperatura',
       data: [],
-      backgroundColor:'rgba(255, 124, 56,0.3)',
-      borderColor: 'rgb(255, 124, 56)',
+      backgroundColor:'rgba(76, 201, 240,0.3)',
+      borderColor: 'rgb(76, 201, 240)',
       borderWidth: 1
     },
     pulso: {
       label:'Pulso arterial',
       data: [],
-      backgroundColor:'rgba(224, 62, 54,0.3)',
-      borderColor: 'rgb(224, 62, 54)',
+      backgroundColor:'rgba(67, 97, 238,0.3)',
+      borderColor: 'rgb(67, 97, 238)',
       borderWidth: 1
     },
     frecuencia_respiratoria:{
       label:'Frecuencia respiratoria',
       data: [],
-      backgroundColor:'rgba(184, 13, 87,0.3)',
-      borderColor: 'rgb(184, 13, 87)',
+      backgroundColor:'rgba(58, 12, 163,0.3)',
+      borderColor: 'rgb(58, 12, 163)',
       borderWidth: 1
     },
     saturacion_oxigeno:{
       label:'Saturación de oxígeno',
       data: [],
-      backgroundColor:'rgba(44, 0, 62,0.3)',
-      borderColor: 'rgb(44, 0, 62)',
+      backgroundColor:'rgba(114, 9, 183,0.3)',
+      borderColor: 'rgb(114, 9, 183)',
       borderWidth: 1
     }
   }
@@ -153,15 +153,15 @@ export class UsuarioHistorialPage implements OnInit {
     presion_arterial:{
       label:'Sistólica',
       data: [],
-      backgroundColor:'rgba(112, 9, 97,0.3)',
-      borderColor: 'rgb(112, 9, 97)',
+      backgroundColor:'rgba(247, 37, 133,0.3)',
+      borderColor: 'rgb(247, 37, 133)',
       borderWidth: 1
     },
     presion_arterial_disto:{
       label:'Diastólica',
       data: [],
-      backgroundColor:'rgba(255, 9, 97,0.3)',
-      borderColor: 'rgb(112, 9, 97)',
+      backgroundColor:'rgba(84, 13, 110,0.3)',
+      borderColor: 'rgb(84, 13, 110)',
       borderWidth: 1
     },
   }
@@ -241,7 +241,7 @@ export class UsuarioHistorialPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log(this.authService.usuario);
+    //console.log(this.authService.usuario);
     if(this.authService.usuario){
       this.usuario = this.authService.usuario;
       this.edad = moment().diff(moment(this.usuario.fecha_nacimiento),'year');

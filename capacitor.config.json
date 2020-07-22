@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "covidApp",
+  "appId": "cicese.guardian.covid",
+  "appName": "guardianCOVID",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

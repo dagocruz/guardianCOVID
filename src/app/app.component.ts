@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AuthService } from "./services/auth.service";
 import { Router } from "@angular/router";
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-root',
@@ -22,14 +23,24 @@ export class AppComponent implements OnInit {
       icon: 'person'
     },
     {
-      title: 'Residentes',
-      url: 'home-residentes',
-      icon: 'people'
+      title: 'Escanear QR',
+      url: '/escaner-qr',
+      icon: 'scan'
     },
     {
-      title: 'Guías de cuidado',
+      title: 'Medidas de ingreso',
       url: '/guias-cuidado',
-      icon: 'book'
+      icon: 'reader'
+    },
+    {
+      title: 'Aviso de privacidad',
+      url: '/aviso-privacidad',
+      icon: 'lock-closed'
+    },
+    {
+      title: 'Acerca de',
+      url: '/acerca-de',
+      icon: 'information-circle'
     }
   ];
   public labels = [];
@@ -39,7 +50,8 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
   ) {
     this.initializeApp();
   }
@@ -58,16 +70,17 @@ export class AppComponent implements OnInit {
           this.authService.getUsuarioData().subscribe(usuario => {
             //console.log(usuario['data']);
             this.authService.usuario = usuario['data'];
-            if(this.authService.usuario.tipo=='superadmin' || this.authService.usuario.tipo=='administrador'){
+            /*if(this.authService.usuario.tipo=='superadmin' || this.authService.usuario.tipo=='administrador'){
               this.appPages.splice(1,0,{
                 title: 'Colaboradores',
                 url: 'home-colaboradores',
                 icon: 'people-circle'
               });
-            }
+            }*/
 
             this.selectedIndex = 0; 
-            this.router.navigate(['home-usuario'],{ replaceUrl: true });   
+            this.router.navigate(['home-usuario'],{ replaceUrl: true });
+            this.showAlert();   
           });
         }
         else
@@ -91,5 +104,37 @@ export class AppComponent implements OnInit {
     //  this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     //}
     this.selectedIndex = null;
+  }
+
+  async showAlert(){
+    const alert = await this.alertController.create({
+      header: 'Aviso de privacidad',
+      message: '¿Aceptas los términos y condiciones para compartir tus datos por el uso de <strong>guardianCOVID</strong>?',
+      cssClass:'buttonCss',
+      buttons: [ 
+        {
+          text: 'Estoy de acuerdo',
+          cssClass: 'agree-button',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        },
+        {
+          text: 'Ver más ...',
+          cssClass: 'agree-button',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.router.navigate(['aviso-privacidad'],{ replaceUrl: true });
+          }
+        },
+        {
+        text: 'No estoy de acuerdo',
+        cssClass: 'disagree-button',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }]
+    });
+    await alert.present();
   }
 }

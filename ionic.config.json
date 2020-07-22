@@ -1,7 +1,8 @@
 {
   "name": "CLP COVID MX",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

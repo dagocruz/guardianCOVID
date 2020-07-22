@@ -12,7 +12,7 @@
     <ion-row>
       <ion-col size="8" offset="2">
         <div class="ion-text-center">
-          <p> <ion-text color="primary">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
+          <p> <ion-text color="danger">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
         </div>
       </ion-col>
     </ion-row>
@@ -27,7 +27,7 @@
       <ion-col size="8" offset="2">
         <div class="ion-text-center">
           <h3>{{usuario?.nombre}}</h3>
-          <ion-text color="secondary">
+          <ion-text color="success">
               <h4> {{edad}} años</h4>
           </ion-text>
           <p><ion-text color="medium">{{usuario?.residencias[0].nombre}}</ion-text></p>
@@ -53,43 +53,43 @@
           <ion-toggle formControlName="hipertension"></ion-toggle>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Antecedente de infarto al miocardio</ion-label>
           <ion-toggle formControlName="infarto"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item>
           <ion-label>Enfermedad cardiovascular</ion-label>
           <ion-toggle formControlName="cardiaca"></ion-toggle>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Uso de inmunosupresores</ion-label>
           <ion-button fill="clear" size="small" color="dark" (click)="presentPopover(0)">
             <ion-icon slot="icon-only" name="help-circle"></ion-icon>
           </ion-button>
           <ion-toggle formControlName="inmunosupresores"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Enfermedad pulmonar obstructiva crónica</ion-label>
           <ion-toggle formControlName="pulmonar"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Enfermadad hepática crónica</ion-label>
           <ion-toggle formControlName="hepatica"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item>
           <ion-label>Asma</ion-label>
           <ion-toggle formControlName="asma"></ion-toggle>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Enfermedad renal crónica</ion-label>
           <ion-toggle formControlName="renal"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item>
           <ion-label>Tabaquismo activo</ion-label>
@@ -101,15 +101,15 @@
           <ion-toggle formControlName="tabaquismo_inactivo"></ion-toggle>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Cáncer en tratamiento</ion-label>
           <ion-toggle formControlName="cancer"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Infección por VIH</ion-label>
           <ion-toggle formControlName="vih"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item>
           <ion-label>Enfermedad autoinmune</ion-label>
@@ -121,7 +121,7 @@
           <ion-toggle formControlName="obesidad"></ion-toggle>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Demencia diagnosticada</ion-label>
           <ion-toggle formControlName="demencia"></ion-toggle>
         </ion-item>
@@ -137,7 +137,7 @@
             <ion-icon slot="icon-only" name="help-circle"></ion-icon>
           </ion-button>
           <ion-toggle formControlName="deterioro_funcional"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
 
         <div class="ion-padding">
           <ion-button expand="block" type="submit" [disabled]="!antecedentesForm.valid" class="ion-no-margin"><ion-icon slot="start"  name="cloud-upload"></ion-icon> Registrar</ion-button>

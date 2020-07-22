@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController, PopoverController, IonSlides } from '@ionic/angular';
 import { timer, Subscription } from "rxjs";
-
+import { AyudaAntecedenteComponent } from './../../components/ayuda-antecedente/ayuda-antecedente.component';
+import { PopoverCodigoColoresComponent } from "../../components/popover-codigo-colores/popover-codigo-colores.component";
 import * as moment from "moment";
 
 @Component({
@@ -31,6 +32,9 @@ export class CodigoQrPage implements OnInit {
   tiempoActual:any;
   countDown:Subscription;
   tiempoExpiracion:any;
+  textFecha:String;
+
+
   slideOpts = {
     initialSlide: 0,
     speed: 600,
@@ -124,6 +128,7 @@ export class CodigoQrPage implements OnInit {
     private formBuilder: FormBuilder, 
     private authService:AuthService,
     private toastController: ToastController,
+    private popOverController: PopoverController
 
   ) { 
    }
@@ -132,13 +137,14 @@ export class CodigoQrPage implements OnInit {
 
     this.authService.getQR().subscribe(qrs => {
       //console.log('getQR');
-      //console.log(qrs);
+      console.log(qrs);
       if(qrs['data'].length){
         let aux = qrs['data'][0];
         let duration:any = moment.duration((moment(aux['fecha_expiracion']).valueOf()-moment().valueOf()),'milliseconds');
         //console.log(moment(aux['fecha']).format());
         //console.log(moment().format());
         //console.log(duration/1000);
+        this.textFecha = moment(aux['fecha_expiracion']).format('L');
         if((duration-1000) > 1){
           this.authService.infoQR = qrs['data'][0];
           this.infoQR = this.authService.infoQR;
@@ -355,14 +361,13 @@ export class CodigoQrPage implements OnInit {
       this.infoQR = this.authService.infoQR;
       this.infoQR['creado'] = true;
       this.qrData = JSON.stringify({id_QR:this.infoQR['id'],fecha:this.infoQR['fecha_expiracion']});
-
+      this.textFecha = moment(this.infoQR['fecha_expiracion']).format('L');
       let toast = this.toastController.create({
         message: `Se ha creado el código QR para ${this.usuario.nombre}.`,
         duration: 3000
       });
       
       toast.then(toast => toast.present());
-
       this.iniciarContador();
       this.slides.slideTo(1);
 
@@ -414,6 +419,15 @@ export class CodigoQrPage implements OnInit {
         }
       });
     }
+  }
+
+  async presentPopOver(data: any) {
+    const popover = await this.popOverController.create({
+      component: PopoverCodigoColoresComponent,
+      translucent: true
+    });
+
+    return await popover.present();
   }
 
 }

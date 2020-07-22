@@ -21,7 +21,8 @@ import { Residente } from "../models/Residente";
 export class ResidentesService {
 
   url = environment.url;
-  private url_REST = 'https://inger.cicese.mx/api/v1';
+  private url_REST = 'https://guardiancovid.cicese.mx/api/v1';
+  //private url_REST = 'https://inger.cicese.mx/api/v1';
   //private url_REST = 'http://159.65.71.190/covidApp';
   //private url_REST = 'http://192.168.1.73:3000'; 
   //private url_REST = 'http://localhost:3000';

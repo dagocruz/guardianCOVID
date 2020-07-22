@@ -9,7 +9,7 @@
   
   <ion-content [fullscreen]="true">
     <ion-fab vertical="top" horizontal="end" slot="fixed">
-      <ion-fab-button routerLink="/codigo-qr-colaborador" routerDirection="forward" fill="outline">
+      <ion-fab-button (click)="forward('codigo-qr-colaborador')" fill="outline">
         <ion-icon name="qr-code-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>

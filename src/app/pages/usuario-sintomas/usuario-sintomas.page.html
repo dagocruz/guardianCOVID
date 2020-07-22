@@ -12,7 +12,7 @@
       <ion-row>
         <ion-col size="8" offset="2">
           <div class="ion-text-center">
-            <p> <ion-text color="primary">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
+            <p> <ion-text color="danger">{{fecha | date:'dd/MM/yyyy, h:mm a' }}</ion-text> </p>
           </div>
         </ion-col>
       </ion-row>
@@ -27,7 +27,7 @@
         <ion-col size="8" offset="2">
           <div class="ion-text-center">
             <h3>{{usuario.nombre}}</h3>
-            <ion-text color="secondary">
+            <ion-text color="success">
                 <h4> {{edad}} años</h4>
             </ion-text>
             <p><ion-text color="medium">{{usuario?.residencias[0].nombre}}</ion-text></p>
@@ -223,7 +223,7 @@
               </ion-item>
             </div>
 
-            <ion-item-divider color="medium">
+            <!-- <ion-item-divider color="medium">
               <ion-label>Confusión (Confusion Assessment Method)</ion-label>
               <ion-button fill="clear" size="small" color="dark" (click)="presentPopover(0)">
                 <ion-icon slot="icon-only" name="help-circle" [ngStyle]="{'color':'rgb(255,255,255)'}"></ion-icon>
@@ -265,7 +265,7 @@
                 </ion-label>
                 <ion-toggle formControlName="criterio_4" (ionChange)="checkCAM('criterio_4')"></ion-toggle>
               </ion-item>
-            </div>
+            </div> -->
 
 
             <div class="ion-padding">

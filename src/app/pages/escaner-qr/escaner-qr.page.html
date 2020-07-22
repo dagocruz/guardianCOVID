@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Escanear Código QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+  <div class="ion-padding" [ngStyle]="{'background-color': data?.color,'height':'100%'}">
+    <div class="ion-text-center" *ngIf="data">
+      <br>
+      <br>
+      <br>
+      <div *ngIf="data.permitir">
+        <ion-text color="light">
+          <h1><ion-icon name="checkmark-circle"></ion-icon></h1>
+          <h4>Solicitud de acceso a {{data.nombre}} aceptada.</h4>
+        </ion-text>  
+      </div>
+      <div *ngIf="!data.permitir">
+        <ion-text color="light">
+          <h1><ion-icon name="close-circle"></ion-icon> </h1>
+          <h4>Solicitud de acceso a {{data.nombre}} rechazada.</h4>
+        </ion-text>
+      </div>
+    </div>
+    <div class="ion-padding">
+      <ion-button expand="block" class="ion-no-margin" (click)="scan()" color="dark" ><ion-icon slot="start" name="scan-outline"></ion-icon>Escanear</ion-button>
+    </div>
+  </div>
+</ion-content>

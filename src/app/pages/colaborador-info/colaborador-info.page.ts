@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { ColaboradoresService } from './../../services/colaboradores.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -18,7 +19,8 @@ export class ColaboradorInfoPage implements OnInit {
     private activatedRoute: ActivatedRoute, 
     private colaboradoresService: ColaboradoresService, 
     private router:Router,
-    private authService:AuthService) { }
+    private authService:AuthService,
+    private navController: NavController) { }
 
   ngOnInit() {  
     this.getColaborador();
@@ -32,7 +34,8 @@ export class ColaboradorInfoPage implements OnInit {
       this.colaborador = colaborador['data']; 
       this.colaboradoresService.colaborador = colaborador['data'];
       //console.log(this.colaborador);
-      this.router.navigate([`colaboradores/${id}/historial`]);
+      //this.router.navigate([`colaboradores/${id}/historial`]);
+      this.navController.navigateForward([`colaboradores/${id}/historial`]);
     });
   
   }

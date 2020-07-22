@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Guías de cuidado</ion-title>
+      <ion-title>Medidas de ingreso</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -12,44 +12,61 @@
       <ion-row>
         <ion-col size="12">
             <ion-card>
-                <img src="../../../assets/mock3.png" />
+                <!-- <img src="../../../assets/mock3.png" /> -->
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4" offset="1">
+                        <ion-img src="../../../assets/tomar_temperatura.png"></ion-img>
+                    </ion-col>
+                    <ion-col size="4" offset="2">
+                        <ion-img src="../../../assets/uso_cubrebocas.png"></ion-img>
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>
                 <ion-card-header>
-                  <ion-card-title>Prevención en personas mayores</ion-card-title>
+                  <ion-card-title>Medidas <ion-text color="danger"> OBLIGATORIAS </ion-text>para ingresar</ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
-                  Las personas mayores son más susceptibles de tener complicaciones e incluso morir por esta nueva enfermedad.
+                    <ol>
+                      <li><ion-text color="danger">Se les tomará la temperatura corporal </ion-text> por los vigilantes en la caseta de entrada.</li>
+                      <li><ion-text color="danger">Deberán usar  cubrebocas para ingresar al Centro </ion-text>(por seguridad del
+                          trabajador y del guardia) el cual deberá usar dentro de las instalaciones del Centro si tiene que interactuar con otras personas.</li>
+                    </ol>
                 </ion-card-content>
-                <ion-item>
+                <!-- <ion-item>
                     <ion-button fill="outline" slot="end">Ver más...</ion-button>
-                  </ion-item>
+                  </ion-item> -->
               </ion-card>
         </ion-col>
         <ion-col size="12">
             <ion-card>
-                <img src="../../../assets/mock1.png" />
+                <ion-grid>
+                    <ion-row>
+                      <ion-col size="4" offset="1">
+                          <ion-img src="../../../assets/fiebre.png"></ion-img>
+                      </ion-col>
+                      <ion-col size="4" offset="2">
+                          <ion-img src="../../../assets/dificultad_respirar.png"></ion-img>
+                        </ion-col>
+                    </ion-row>
+                  </ion-grid>
                 <ion-card-header>
-                  <ion-card-title>Prevenir la introducción</ion-card-title>
+                  <ion-card-title>No se permitirá el ingreso al CICESE si:</ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
-                  ¿Cómo prevenir la introducción del nuevo coronavirus en su establecimiento?
+                  <ul>
+                    <li><ion-text color="danger">No respeta las medidas 1 y 2 </ion-text> y serán reportados a la Subdirección de
+                        Recursos Humanos para que el CICESE aplique las medidas correspondientes.</li>
+                    <li>Presenta <ion-text color="danger">temperatura mayor a 37.5 grados.</ion-text></li>
+                    <li> Padece al menos dos de los siguientes síntomas: <ion-text color="danger">tos, fiebre, dolor de 
+                      cabeza </ion-text>, acompañado con alguno de los siguientes: <ion-text color="danger">dificultad para respirar, 
+                      dolor o ardor de garganta, escurrimiento nasal, ojos rojos, 
+                      dolores en músculos o articulaciones </ion-text></li>
+                  </ul>
                 </ion-card-content>
-                <ion-item>
+                <!-- <ion-item>
                     <ion-button fill="outline" slot="end">Ver más...</ion-button>
-                  </ion-item>
-              </ion-card>
-        </ion-col>
-        <ion-col size="12">
-            <ion-card>
-                <img src="../../../assets/mock2.png" />
-                <ion-card-header>
-                  <ion-card-title>Transmisión entre establecimientos</ion-card-title>
-                </ion-card-header>
-                <ion-card-content>
-                  ¿Cómo prevenir la transmisión del nuevo coronavirus entre establecimientos?
-                </ion-card-content>
-                <ion-item>
-                    <ion-button fill="outline" slot="end">Ver más...</ion-button>
-                  </ion-item>
+                  </ion-item> -->
               </ion-card>
         </ion-col>
       </ion-row>

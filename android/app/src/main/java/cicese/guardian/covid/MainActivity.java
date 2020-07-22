@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package cicese.guardian.covid;
 
 import android.os.Bundle;
 

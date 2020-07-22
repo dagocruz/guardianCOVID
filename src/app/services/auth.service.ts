@@ -16,7 +16,8 @@ const TOKEN_KEY = 'access_token'
 export class AuthService {
 
   url = environment.url;
-  private url_REST = 'https://inger.cicese.mx/api/v1';
+  private url_REST = 'https://guardiancovid.cicese.mx/api/v1';
+  //private url_REST = 'https://inger.cicese.mx/api/v1';
   //private url_REST = 'http://159.65.71.190/covidApp';
   //url_REST = 'http://192.168.1.73:3000'; 
   //url_REST = 'http://localhost:3000';
@@ -72,7 +73,7 @@ export class AuthService {
       .pipe(
         tap(res => {
           this.storage.set(TOKEN_KEY,res['token']);
-          console.log(res['token']);
+          //console.log(res['token']);
           this.token = res['token'];
           this.user = this.helper.decodeToken(res['token']);
           //setTimeout(function(){this.authenticationState.next(true)}, 300);
@@ -134,14 +135,14 @@ export class AuthService {
   }
 
   getQR(){
-    /*let httpOptions = {
+    let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': `Bearer ${this.token}`
       })
-    };*/
+    };
 
-    return this.http.get(`${this.url_REST}/qr`).pipe(
+    return this.http.get(`${this.url_REST}/qr`,httpOptions).pipe(
       catchError(e => {
         console.log(e);
         let status = e.status;
@@ -156,7 +157,13 @@ export class AuthService {
   }
 
   registrarQR(dataQR){
-    return this.http.post(`${this.url_REST}/qr`,dataQR).pipe(
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${this.token}`
+      })
+    };
+    return this.http.post(`${this.url_REST}/qr`,dataQR,httpOptions).pipe(
       catchError(e => {
         this.showAlert(e.error.msg);
         throw new Error(e);

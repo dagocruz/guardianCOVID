@@ -121,6 +121,18 @@ const routes: Routes = [
   {
     path: 'codigo-qr-colaborador',
     loadChildren: () => import('./pages/codigo-qr-colaborador/codigo-qr-colaborador.module').then( m => m.CodigoQrColaboradorPageModule)
+  },
+  {
+    path: 'acerca-de',
+    loadChildren: () => import('./pages/acerca-de/acerca-de.module').then( m => m.AcercaDePageModule)
+  },
+  {
+    path: 'escaner-qr',
+    loadChildren: () => import('./pages/escaner-qr/escaner-qr.module').then( m => m.EscanerQrPageModule)
+  },
+  {
+    path: 'aviso-privacidad',
+    loadChildren: () => import('./pages/aviso-privacidad/aviso-privacidad.module').then( m => m.AvisoPrivacidadPageModule)
   }
 ];
 

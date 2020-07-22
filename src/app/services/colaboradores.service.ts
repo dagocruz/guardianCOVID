@@ -11,7 +11,8 @@ import { BehaviorSubject, Observable, of } from "rxjs";
 export class ColaboradoresService {
 
   url = environment.url;
-  private url_REST = 'https://inger.cicese.mx/api/v1';
+  //private url_REST = 'https://inger.cicese.mx/api/v1';
+  private url_REST = 'https://guardiancovid.cicese.mx/api/v1';
 
   public colaborador:any;
   infoQR = {};
